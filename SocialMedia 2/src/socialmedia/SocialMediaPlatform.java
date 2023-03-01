@@ -11,7 +11,7 @@ package socialmedia;
  * @version 1.0
  *
  */
-public interface SocialMediaPlatform extends MiniSocialMediaPlatform {
+public interface SocialMediaPlatform {
 
 	// Account-related methods ****************************************
 
