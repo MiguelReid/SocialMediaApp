@@ -5,17 +5,12 @@ import java.util.List;
 
 public class Post {
 
-    private String handle, message;
-    private final int id;
-    private static int numPosts = 0;
-    private List<String> responses = new ArrayList<>();
-    private boolean isEndorsement = false;
+    protected String handle, message;
+    protected final int id;
+    protected static int numPosts = 0;
+    protected List<String> responses = new ArrayList<>();
+    protected boolean isEndorsement = false;
 
-    public Post(String handle, String message) {
-        this.handle = handle;
-        this.message = message;
-        this.id = numPosts++;
-    }
 
     public void setHandle(String handle) {
         this.handle = handle;
@@ -25,11 +20,11 @@ public class Post {
         this.message = message;
     }
 
-    public boolean isEndorsement() {
+    public boolean getIsEndorsement() {
         return isEndorsement;
     }
 
-    public void setEndorsement(boolean endorsement) {
+    public void setIsEndorsement(boolean endorsement) {
         isEndorsement = endorsement;
     }
 
@@ -47,10 +42,18 @@ public class Post {
         return id;
     }
 
+    public Post(String handle, String message) {
+        this.handle = handle;
+        this.message = message;
+        this.id = numPosts++;
+    }
+
     public Post(String handle) {
         this.handle = handle;
         this.id = numPosts++;
     }
+
+    //TODO ADD TOSTRING
 
     public static void main(String[] args) {
 
