@@ -8,6 +8,8 @@ public class Comment extends Post{
         return parentPostID;
     }
 
+    //TODO check if we have to see flag about isEndorsement
+
     public void setParentPostID(int parentPostID) {
         this.parentPostID = parentPostID;
     }
