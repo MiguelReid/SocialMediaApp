@@ -9,70 +9,81 @@ import static socialmedia.Post.getAllPosts;
 public class SocialMedia implements SocialMediaPlatform {
 
     public int createAccount(String handle) throws IllegalHandleException, InvalidHandleException {
-        //TODO Set handle, create id
 
-        return 0;
+        Account account = new Account(handle);
+        return account.getId();
     }
 
     @Override
     public int createAccount(String handle, String description) throws IllegalHandleException, InvalidHandleException {
+        Account account = new Account(handle, description);
+        System.out.println("Account created");
 
-        return 0;
+        return account.getId();
     }
 
     public void removeAccount(int id) throws AccountIDNotRecognisedException {
-        // TODO Auto-generated method stub
-
+        Account.removeAccount(id);
+        System.out.println("Account removed");
     }
 
     @Override
     public void removeAccount(String handle) throws HandleNotRecognisedException {
-        // TODO Auto-generated method stub
-
+        Account.removeAccount(handle);
+        System.out.println("Account removed");
     }
 
     public void changeAccountHandle(String oldHandle, String newHandle)
             throws HandleNotRecognisedException, IllegalHandleException, InvalidHandleException {
-        // TODO Auto-generated method stub
 
+        Account account = Account.searchByHandle(oldHandle);
+        account.setHandle(newHandle);
+        System.out.println("Account handle changed");
     }
 
     @Override
     public void updateAccountDescription(String handle, String description) throws HandleNotRecognisedException {
-        // TODO Auto-generated method stub
 
+        Account account = Account.searchByHandle(handle);
+        account.setDescription(description);
+        System.out.println("Account description changed");
     }
 
     public String showAccount(String handle) throws HandleNotRecognisedException {
-        // TODO Auto-generated method stub
-        return null;
+        Account account = Account.searchByHandle(handle);
+        return account.toString();
     }
 
     public int createPost(String handle, String message) throws HandleNotRecognisedException, InvalidPostException {
-        // TODO Auto-generated method stub
-        return 0;
+        Post post = new Post(handle, message);
+        System.out.println("Post created");
+        return post.getId();
     }
 
     public int endorsePost(String handle, int id)
             throws HandleNotRecognisedException, PostIDNotRecognisedException, NotActionablePostException {
-        // TODO Auto-generated method stub
-        return 0;
+
+        Endorsement endorsement = new Endorsement(handle, id);
+        System.out.println("Endorsement created");
+        return endorsement.getId();
     }
 
     public int commentPost(String handle, int id, String message) throws HandleNotRecognisedException,
             PostIDNotRecognisedException, NotActionablePostException, InvalidPostException {
-        // TODO Auto-generated method stub
-        return 0;
+
+        Comment comment = new Comment(handle, id, message);
+        System.out.println("Comment created");
+        return comment.getId();
     }
 
     public void deletePost(int id) throws PostIDNotRecognisedException {
-        // TODO Auto-generated method stub
-
+        Post.removePost(id);
+        System.out.println("Post removed");
     }
 
     public String showIndividualPost(int id) throws PostIDNotRecognisedException {
-        // TODO Auto-generated method stub
-        return null;
+        Post post = Post.searchById(id);
+        return post.toString();
     }
 
     public StringBuilder showPostChildrenDetails(int id)
@@ -83,8 +94,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
     @Override
     public int getNumberOfAccounts() {
-        // TODO Auto-generated method stub
-        return 0;
+        return Account.getNumberOfAccounts();
     }
 
     @Override

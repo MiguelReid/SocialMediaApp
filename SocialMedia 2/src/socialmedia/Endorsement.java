@@ -22,12 +22,12 @@ public class Endorsement extends Post {
         message = parentObject.getMessage();
     }
 
-    /*
-    public Endorsement(String handle, int parentPostID ,String message) {
-        super(handle, message);
-        setHandle(handle);
-        setMessage(message);
-        this.parentPostID = parentPostID;
+    @Override
+    public String toString() {
+        return "Endorsement{" +
+                "handle='" + handle + '\'' +
+                ", message='" + message + '\'' +
+                ", id=" + id +
+                '}';
     }
-    */
 }

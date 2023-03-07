@@ -75,9 +75,8 @@ public class Post {
         this.id = numPosts++;
     }
 
-    public Post searchById(int searchId) {
+    public static Post searchById(int searchId) {
         Post foundPost = null;
-        List<Post> allPosts = getAllPosts();
         for (Post post : allPosts) {
             int id = post.getId();
             if (id == searchId) {
@@ -87,10 +86,25 @@ public class Post {
         return foundPost;
     }
 
-    //TODO ADD TOSTRING
+    public static void removePost(int id) {
+        Post post = searchById(id);
+        allPosts.remove(post);
+    }
 
-    public static void main(String[] args) {
+    public static int getNumberOnlyPosts() {
+        int counter = 0;
 
-        System.out.println(numPosts);
+        for (Post post : allPosts) {
+            counter++;
+        }//START WITH THIS, THEN DO THE SAME FOR COMMENT AND ENDORSEMENTS, THEN DO SOCILAMEDIA :)
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "handle='" + handle + '\'' +
+                ", message='" + message + '\'' +
+                ", id=" + id +
+                '}';
     }
 }

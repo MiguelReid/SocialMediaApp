@@ -27,7 +27,12 @@ public class Comment extends Post{
         this.parentPostID = parentPostID;
     }
 
-    //TODO ADD TOSTRING
-
-
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "handle='" + handle + '\'' +
+                ", message='" + message + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }
