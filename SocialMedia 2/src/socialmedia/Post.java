@@ -73,6 +73,7 @@ public class Post {
     public Post(String handle) {
         this.handle = handle;
         this.id = numPosts++;
+        allPosts.add(this);
     }
 
     public static Post searchById(int searchId) {
@@ -94,9 +95,12 @@ public class Post {
     public static int getNumberOnlyPosts() {
         int counter = 0;
 
-        for (Post post : allPosts) {
-            counter++;
-        }//START WITH THIS, THEN DO THE SAME FOR COMMENT AND ENDORSEMENTS, THEN DO SOCILAMEDIA :)
+        for (Object post : allPosts) {
+            if (!(post instanceof Comment) && !(post instanceof Endorsement)) {
+                counter++;
+            }
+        }
+        return counter;
     }
 
     @Override

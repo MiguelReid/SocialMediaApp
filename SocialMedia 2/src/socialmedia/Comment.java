@@ -1,6 +1,6 @@
 package socialmedia;
 
-public class Comment extends Post{
+public class Comment extends Post {
 
     private int parentPostID;
 
@@ -19,12 +19,16 @@ public class Comment extends Post{
         setHandle(handle);
         setMessage(message);
         this.parentPostID = parentPostID;
+        Post parentPost = Post.searchById(parentPostID);
+        parentPost.setResponseComments(this);
     }
 
     public Comment(String handle, int parentPostID) {
         super(handle);
         setHandle(handle);
         this.parentPostID = parentPostID;
+        Post parentPost = Post.searchById(parentPostID);
+        parentPost.setResponseComments(this);
     }
 
     @Override

@@ -7,18 +7,18 @@ import socialmedia.SocialMedia;
  * want to increase these checks, and run it on your SocialMedia class (not the
  * BadSocialMedia class).
  *
- * 
  * @author Diogo Pacheco
  * @version 1.0
  */
 public class SocialMediaPlatformTestApp {
 
-	/**
-	 * Test method.
-	 * 
-	 * @param args not used
-	 */
-	public static void main(String[] args) {
+    /**
+     * Test method.
+     *
+     * @param args not used
+     */
+    public static void main(String[] args) {
+		/*
 		System.out.println("The system compiled and started the execution...");
 
 		SocialMediaPlatform platform = new SocialMedia();
@@ -44,6 +44,15 @@ public class SocialMediaPlatformTestApp {
 		} catch (AccountIDNotRecognisedException e) {
 			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
 		}
-	}
+		 */
 
+        Post post1 = new Post("a");
+        Post post2 = new Post("b");
+        Post post3 = new Post("c");
+        Comment comment1 = new Comment("d", post1.getId());
+        Endorsement endorsement = new Endorsement("e", post2.getId());
+
+        System.out.println("Posts -> " + Post.getNumberOnlyPosts());
+
+    }
 }

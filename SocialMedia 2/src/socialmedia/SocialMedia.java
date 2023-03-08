@@ -33,8 +33,7 @@ public class SocialMedia implements SocialMediaPlatform {
         System.out.println("Account removed");
     }
 
-    public void changeAccountHandle(String oldHandle, String newHandle)
-            throws HandleNotRecognisedException, IllegalHandleException, InvalidHandleException {
+    public void changeAccountHandle(String oldHandle, String newHandle) throws HandleNotRecognisedException, IllegalHandleException, InvalidHandleException {
 
         Account account = Account.searchByHandle(oldHandle);
         account.setHandle(newHandle);
@@ -60,16 +59,14 @@ public class SocialMedia implements SocialMediaPlatform {
         return post.getId();
     }
 
-    public int endorsePost(String handle, int id)
-            throws HandleNotRecognisedException, PostIDNotRecognisedException, NotActionablePostException {
+    public int endorsePost(String handle, int id) throws HandleNotRecognisedException, PostIDNotRecognisedException, NotActionablePostException {
 
         Endorsement endorsement = new Endorsement(handle, id);
         System.out.println("Endorsement created");
         return endorsement.getId();
     }
 
-    public int commentPost(String handle, int id, String message) throws HandleNotRecognisedException,
-            PostIDNotRecognisedException, NotActionablePostException, InvalidPostException {
+    public int commentPost(String handle, int id, String message) throws HandleNotRecognisedException, PostIDNotRecognisedException, NotActionablePostException, InvalidPostException {
 
         Comment comment = new Comment(handle, id, message);
         System.out.println("Comment created");
@@ -86,11 +83,32 @@ public class SocialMedia implements SocialMediaPlatform {
         return post.toString();
     }
 
-    public StringBuilder showPostChildrenDetails(int id)
-            throws PostIDNotRecognisedException, NotActionablePostException {
-        // TODO Auto-generated method stub
-        return null;
+    public StringBuilder showPostChildrenDetails(int id) throws PostIDNotRecognisedException, NotActionablePostException {
+        StringBuilder builder = new StringBuilder("<pre>");
+        // Add parent details to StringBuilder
+        Post post = Post.searchById(id);
+
+        builder.append(getCommentDetails(post));
+        builder.append("</pre>");
+        return builder;
     }
+
+    public StringBuilder getCommentDetails(Post post) {
+        StringBuilder builder = new StringBuilder();
+        List<Comment> comments = post.getResponseComments();
+        for (Comment comment : comments) {
+            // Add parent details to StringBuilder
+            getCommentDetails(comment);
+            // Add above to StringBuilder
+        }
+        return builder;
+    }
+
+    public String auxChildrenDetails(int id, String handle, int endorsements, int comments, String message) {
+
+        return "ID: " + id + "\nAccount: " + handle + "\nNo. endorsements: " + endorsements + " | No. comments: " + comments + "\n" + message;
+    }
+
 
     @Override
     public int getNumberOfAccounts() {
