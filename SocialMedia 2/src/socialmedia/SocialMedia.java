@@ -84,29 +84,45 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     public StringBuilder showPostChildrenDetails(int id) throws PostIDNotRecognisedException, NotActionablePostException {
-        StringBuilder builder = new StringBuilder("<pre>");
         // Add parent details to StringBuilder
+        StringBuilder builder = new StringBuilder("<pre>\n");
         Post post = Post.searchById(id);
 
-        builder.append(getCommentDetails(post));
-        builder.append("</pre>");
+        builder.append(getCommentDetails(post, 0));
+        builder.append("\n</pre>");
         return builder;
     }
 
-    public StringBuilder getCommentDetails(Post post) {
-        StringBuilder builder = new StringBuilder();
+    public StringBuilder getCommentDetails(Post post, int indentCounter) {
         List<Comment> comments = post.getResponseComments();
+
+        StringBuilder builder = new StringBuilder();
+
+        builder.append(auxPostDetails(post, indentCounter));
+
         for (Comment comment : comments) {
-            // Add parent details to StringBuilder
-            getCommentDetails(comment);
-            // Add above to StringBuilder
+            System.out.println(comment);
+            indentCounter++;
+            builder.append(getCommentDetails(comment, indentCounter));
         }
         return builder;
     }
 
-    public String auxChildrenDetails(int id, String handle, int endorsements, int comments, String message) {
+    public String auxPostDetails(Post post, int indentCounter) {
+        int numEndorsements = post.getResponseEndorsements().size();
+        int numComments = post.getResponseComments().size();
 
-        return "ID: " + id + "\nAccount: " + handle + "\nNo. endorsements: " + endorsements + " | No. comments: " + comments + "\n" + message;
+        String indent = "\t";
+
+        for (int i = 0; i < indentCounter; i++) {
+            indent += indent;
+        }
+
+        String suffix = indent + "|\n" + indent + "| > ";
+
+        return "ID: " + post.getId() + "\n" + indent + "Account: " + post.getHandle() + "\n" + indent +
+                "No. endorsements: " + numEndorsements + " | No. comments: " + numComments + "\n" + indent +
+                post.getMessage() +"\n" + suffix;
     }
 
 

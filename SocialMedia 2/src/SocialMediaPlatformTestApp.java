@@ -17,7 +17,7 @@ public class SocialMediaPlatformTestApp {
      *
      * @param args not used
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NotActionablePostException, PostIDNotRecognisedException {
 		/*
 		System.out.println("The system compiled and started the execution...");
 
@@ -45,14 +45,17 @@ public class SocialMediaPlatformTestApp {
 			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
 		}
 		 */
+        SocialMedia platform = new SocialMedia();
 
         Post post1 = new Post("a");
         Post post2 = new Post("b");
         Post post3 = new Post("c");
         Comment comment1 = new Comment("d", post1.getId());
+        Comment comment2 = new Comment("f", comment1.getId());
         Endorsement endorsement = new Endorsement("e", post2.getId());
+        Endorsement endorsement2 = new Endorsement("g", comment2.getId());
 
-        System.out.println("Posts -> " + Post.getNumberOnlyPosts());
+        System.out.println(platform.showPostChildrenDetails(post1.getId()));
 
     }
 }
