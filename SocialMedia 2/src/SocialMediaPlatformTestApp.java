@@ -47,15 +47,19 @@ public class SocialMediaPlatformTestApp {
 		 */
         SocialMedia platform = new SocialMedia();
 
-        Post post1 = new Post("a");
-        Post post2 = new Post("b");
-        Post post3 = new Post("c");
-        Comment comment1 = new Comment("d", post1.getId());
-        Comment comment2 = new Comment("f", comment1.getId());
-        Endorsement endorsement = new Endorsement("e", post2.getId());
-        Endorsement endorsement2 = new Endorsement("g", comment2.getId());
+        Account juan = new Account("Juan");
+        Account maria = new Account("Maria");
+        Account jose = new Account("Jose");
 
-        System.out.println(platform.showPostChildrenDetails(post1.getId()));
+        Post post1 = new Post(juan.getHandle());
+        Post post2 = new Post(maria.getHandle());
+        Post post3 = new Post(jose.getHandle());
+
+        Endorsement endorsement = new Endorsement(juan.getHandle(), post2.getId());
+        Endorsement endorsement2 = new Endorsement(juan.getHandle(), post2.getId());
+
+
+        System.out.println(platform.getMostEndorsedAccount());
 
     }
 }

@@ -9,6 +9,7 @@ public class Account {
     private final int id;
     private static int idCounter = 0;
     private static List<Account> accounts = new ArrayList<>();
+    private List<Post> accountPosts = new ArrayList<>();
 
     public static List<Account> getAccounts() {
         return accounts;
@@ -34,6 +35,14 @@ public class Account {
         return id;
     }
 
+    public List<Post> getAccountPosts() {
+        return accountPosts;
+    }
+
+    public void setAccountPosts(Post post) {
+        accountPosts.add(post);
+    }
+
     public Account(String handle, String description) {
         this.handle = handle;
         this.description = description;
@@ -51,7 +60,7 @@ public class Account {
         return accounts.size();
     }
 
-    public static Account searchByHandle(String searchHandle){
+    public static Account searchByHandle(String searchHandle) {
         Account foundAccount = null;
         for (Account account : accounts) {
             String handle = account.getHandle();
@@ -81,6 +90,22 @@ public class Account {
     public static void removeAccount(int id) {
         Account account = searchById(id);
         accounts.remove(account);
+    }
+
+    public static int getMostEndorsedAccount() {
+        int id = -1;
+        int mostEndorsements = 0;
+        for (Account account : accounts) {
+            List<Post> posts = account.getAccountPosts();
+            for (Post post : posts) {
+                int endorsements = post.getResponseEndorsements().size();
+                if (endorsements >= mostEndorsements) {
+                    id = account.getId();
+                    mostEndorsements = endorsements;
+                }
+            }
+        }
+        return id;
     }
 
     @Override

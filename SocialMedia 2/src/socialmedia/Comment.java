@@ -31,6 +31,17 @@ public class Comment extends Post {
         parentPost.setResponseComments(this);
     }
 
+    public static int getNumberOnlyComments() {
+        int counter = 0;
+
+        for (Object post : allPosts) {
+            if (post instanceof Comment) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +

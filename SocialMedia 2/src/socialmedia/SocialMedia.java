@@ -1,10 +1,7 @@
 package socialmedia;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import static socialmedia.Post.getAllPosts;
 
 public class SocialMedia implements SocialMediaPlatform {
 
@@ -89,7 +86,7 @@ public class SocialMedia implements SocialMediaPlatform {
         Post post = Post.searchById(id);
 
         builder.append(getCommentDetails(post, 0));
-        builder.append("\n</pre>");
+        builder.append("</pre>");
         return builder;
     }
 
@@ -112,17 +109,17 @@ public class SocialMedia implements SocialMediaPlatform {
         int numEndorsements = post.getResponseEndorsements().size();
         int numComments = post.getResponseComments().size();
 
-        String indent = "\t";
+        StringBuilder indent = new StringBuilder();
 
-        for (int i = 0; i < indentCounter; i++) {
-            indent += indent;
-        }
+        indent.append("\t".repeat(Math.max(0, indentCounter)));
 
         String suffix = indent + "|\n" + indent + "| > ";
 
+        if (numComments == 0) suffix = "";
+
         return "ID: " + post.getId() + "\n" + indent + "Account: " + post.getHandle() + "\n" + indent +
                 "No. endorsements: " + numEndorsements + " | No. comments: " + numComments + "\n" + indent +
-                post.getMessage() +"\n" + suffix;
+                post.getMessage() + "\n" + suffix;
     }
 
 
@@ -133,30 +130,25 @@ public class SocialMedia implements SocialMediaPlatform {
 
     @Override
     public int getTotalOriginalPosts() {
-        // TODO Auto-generated method stub
-        return 0;
+        return Post.getNumberOnlyPosts();
     }
 
     @Override
     public int getTotalEndorsmentPosts() {
-        // TODO Auto-generated method stub
-        return 0;
+        return Endorsement.getNumberOnlyEndorsement();
     }
 
     @Override
     public int getTotalCommentPosts() {
-        // TODO Auto-generated method stub
-        return 0;
+        return Comment.getNumberOnlyComments();
     }
 
     public int getMostEndorsedPost() {
-        // TODO Auto-generated method stub
-        return 0;
+        return Post.getMostEndorsedPost();
     }
 
     public int getMostEndorsedAccount() {
-        // TODO Auto-generated method stub
-        return 0;
+        return Account.getMostEndorsedAccount();
     }
 
     public void erasePlatform() {

@@ -68,12 +68,16 @@ public class Post {
         this.message = message;
         this.id = numPosts++;
         allPosts.add(this);
+        Account account = Account.searchByHandle(handle);
+        account.setAccountPosts(this);
     }
 
     public Post(String handle) {
         this.handle = handle;
         this.id = numPosts++;
         allPosts.add(this);
+        Account account = Account.searchByHandle(handle);
+        account.setAccountPosts(this);
     }
 
     public static Post searchById(int searchId) {
@@ -101,6 +105,19 @@ public class Post {
             }
         }
         return counter;
+    }
+
+    public static int getMostEndorsedPost() {
+        int id = -1;
+        int mostEndorsements = 0;
+        for (Post post : allPosts) {
+            int endorsements = post.getResponseEndorsements().size();
+            if (endorsements >= mostEndorsements) {
+                id = post.getId();
+                mostEndorsements = endorsements;
+            }
+        }
+        return id;
     }
 
     @Override

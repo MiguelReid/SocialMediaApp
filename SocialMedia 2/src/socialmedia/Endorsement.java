@@ -18,8 +18,20 @@ public class Endorsement extends Post {
         super(handle);
         setHandle(handle);
         this.parentPostID = parentPostID;
-        Post parentObject = searchById(parentPostID);
-        message = parentObject.getMessage();
+        Post parentPost = searchById(parentPostID);
+        message = parentPost.getMessage();
+        parentPost.setResponseEndorsements(this);
+    }
+
+    public static int getNumberOnlyEndorsement() {
+        int counter = 0;
+
+        for (Object post : allPosts) {
+            if (post instanceof Endorsement) {
+                counter++;
+            }
+        }
+        return counter;
     }
 
     @Override
