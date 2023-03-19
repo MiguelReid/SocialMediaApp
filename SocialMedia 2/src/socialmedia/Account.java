@@ -11,6 +11,10 @@ public class Account {
     private static List<Account> accounts = new ArrayList<>();
     private List<Post> accountPosts = new ArrayList<>();
 
+    public static int getIdCounter() {
+        return idCounter;
+    }
+
     public static List<Account> getAccounts() {
         return accounts;
     }
@@ -106,6 +110,11 @@ public class Account {
             }
         }
         return id;
+    }
+
+    public static void reset() {
+        accounts.clear();
+        idCounter = 0;
     }
 
     @Override

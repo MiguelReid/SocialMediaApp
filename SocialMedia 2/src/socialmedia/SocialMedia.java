@@ -1,6 +1,7 @@
 package socialmedia;
 
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SocialMedia implements SocialMediaPlatform {
@@ -152,17 +153,40 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     public void erasePlatform() {
-        // TODO Auto-generated method stub
-
+        Account.reset();
+        Post.reset();
     }
 
     public void savePlatform(String filename) throws IOException {
         // TODO Auto-generated method stub
 
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream((filename + ".ser")))) {
+            out.writeObject(Account.getAccounts());
+            out.writeObject(Account.getIdCounter());
+            out.writeObject(Post.getAllPosts());
+        }
     }
-
     public void loadPlatform(String filename) throws IOException, ClassNotFoundException {
-        // TODO Auto-generated method stub
+        List<Account> accounts = null;
+        int idCounter = 0;
+        List<Post> allPosts = null;
 
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename + ".ser"))) {
+
+            Object obj = in.readObject();
+            if (obj instanceof List<Account>)
+                accounts = (List<Account>) in.readObject();
+
+            obj = in.readObject();
+            if (obj instanceof Integer)
+                idCounter = (Integer) in.readObject();
+
+            obj = in.readObject();
+            if (obj instanceof List<Post>)
+                allPosts = (List<Post>) in.readObject();
+        }
+
+
+        // TODO need to cal Post.numPosts from allPosts.length
     }
 }

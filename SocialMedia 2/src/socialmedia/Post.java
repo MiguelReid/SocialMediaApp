@@ -13,6 +13,9 @@ public class Post {
     protected static List<Post> allPosts = new ArrayList<>();
     protected boolean isEndorsement = false;
 
+    public static void setNumPosts(int numPosts) {
+        Post.numPosts = numPosts;
+    }
     public static List<Post> getAllPosts() {
         return allPosts;
     }
@@ -118,6 +121,11 @@ public class Post {
             }
         }
         return id;
+    }
+
+    public static void reset() {
+        allPosts.clear();
+        numPosts = 0;
     }
 
     @Override

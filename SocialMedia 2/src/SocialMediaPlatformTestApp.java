@@ -1,6 +1,8 @@
 import socialmedia.*;
 import socialmedia.SocialMedia;
 
+import java.io.IOException;
+
 /**
  * A short program to illustrate an app testing some minimal functionality of a
  * concrete implementation of the SocialMediaPlatform interface -- note you will
@@ -17,7 +19,7 @@ public class SocialMediaPlatformTestApp {
      *
      * @param args not used
      */
-    public static void main(String[] args) throws NotActionablePostException, PostIDNotRecognisedException {
+    public static void main(String[] args) throws NotActionablePostException, PostIDNotRecognisedException, IOException {
 		/*
 		System.out.println("The system compiled and started the execution...");
 
@@ -60,6 +62,7 @@ public class SocialMediaPlatformTestApp {
 
 
         System.out.println(platform.getMostEndorsedAccount());
+        platform.savePlatform("bundha");
 
     }
 }
