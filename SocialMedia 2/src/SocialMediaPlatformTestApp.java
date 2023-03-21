@@ -1,5 +1,4 @@
 import socialmedia.*;
-import socialmedia.BadSocialMedia;
 
 /**
  * A short program to illustrate an app testing some minimal functionality of a
