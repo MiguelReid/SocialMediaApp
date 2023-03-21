@@ -1,15 +1,24 @@
 package socialmedia;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Account {
+public class Account implements Serializable {
 
     private String handle, description;
     private final int id;
     private static int idCounter = 0;
     private static List<Account> accounts = new ArrayList<>();
     private List<Post> accountPosts = new ArrayList<>();
+
+    public static void setIdCounter(int idCounter) {
+        Account.idCounter = idCounter;
+    }
+
+    public static void setAccounts(List<Account> accounts) {
+        Account.accounts = accounts;
+    }
 
     public static int getIdCounter() {
         return idCounter;

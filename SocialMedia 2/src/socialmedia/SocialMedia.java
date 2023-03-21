@@ -2,6 +2,8 @@ package socialmedia;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class SocialMedia implements SocialMediaPlatform {
@@ -158,35 +160,28 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     public void savePlatform(String filename) throws IOException {
-        // TODO Auto-generated method stub
-
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream((filename + ".ser")))) {
-            out.writeObject(Account.getAccounts());
-            out.writeObject(Account.getIdCounter());
-            out.writeObject(Post.getAllPosts());
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream((filename + ".ser")))) {
+            oos.writeObject(Account.getAccounts());
+            oos.writeObject(Account.getIdCounter());
+            oos.writeObject(Post.getAllPosts());
         }
     }
+
     public void loadPlatform(String filename) throws IOException, ClassNotFoundException {
-        List<Account> accounts = null;
-        int idCounter = 0;
-        List<Post> allPosts = null;
+        ArrayList<Account> accounts;
+        int idCounter;
+        ArrayList<Post> allPosts;
+
 
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename + ".ser"))) {
 
-            Object obj = in.readObject();
-            if (obj instanceof List<Account>)
-                accounts = (List<Account>) in.readObject();
-
-            obj = in.readObject();
-            if (obj instanceof Integer)
-                idCounter = (Integer) in.readObject();
-
-            obj = in.readObject();
-            if (obj instanceof List<Post>)
-                allPosts = (List<Post>) in.readObject();
+            accounts = (ArrayList<Account>) in.readObject();
+            idCounter = (Integer) in.readObject();
+            allPosts = (ArrayList<Post>) in.readObject();
         }
 
-
-        // TODO need to cal Post.numPosts from allPosts.length
+        Post.allPosts = allPosts;
+        Account.setIdCounter(idCounter);
+        Account.setAccounts(accounts);
     }
 }
