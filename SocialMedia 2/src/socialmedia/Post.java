@@ -151,7 +151,7 @@ public class Post implements Serializable {
      *
      * @param id
      */
-    public void removePost(int id) {
+    public static void removePost(int id) {
         Post post = searchById(id);
         allPosts.remove(post);
         post.responseEndorsements = null;
@@ -164,9 +164,9 @@ public class Post implements Serializable {
      */
     public static int getNumberOnlyPosts() {
         int counter = 0;
-
         for (Object post : allPosts) {
             if (!(post instanceof Comment) && !(post instanceof Endorsement)) {
+                // If it is not a comment nor an endorsement it will be a post
                 counter++;
             }
         }
@@ -183,7 +183,9 @@ public class Post implements Serializable {
         int mostEndorsements = 0;
         for (Post post : allPosts) {
             int endorsements = post.getResponseEndorsements().size();
+            // We get how many endorsements does the post have
             if (endorsements >= mostEndorsements) {
+                // Compare it to the one that has currently most endorsements
                 id = post.getId();
                 mostEndorsements = endorsements;
             }

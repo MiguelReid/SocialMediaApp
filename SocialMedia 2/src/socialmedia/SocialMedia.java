@@ -9,20 +9,17 @@ import java.util.List;
 public class SocialMedia implements SocialMediaPlatform {
 
     /**
-     *
      * @param handle account's handle.
      * @return
      * @throws IllegalHandleException
      * @throws InvalidHandleException
      */
     public int createAccount(String handle) throws IllegalHandleException, InvalidHandleException {
-
         Account account = new Account(handle);
         return account.getId();
     }
 
     /**
-     *
      * @param handle      account's handle.
      * @param description account's description.
      * @return
@@ -38,7 +35,6 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     *
      * @param id ID of the account.
      * @throws AccountIDNotRecognisedException
      */
@@ -48,7 +44,6 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     *
      * @param handle account's handle.
      * @throws HandleNotRecognisedException
      */
@@ -59,7 +54,6 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     *
      * @param oldHandle account's old handle.
      * @param newHandle account's new handle.
      * @throws HandleNotRecognisedException
@@ -67,28 +61,24 @@ public class SocialMedia implements SocialMediaPlatform {
      * @throws InvalidHandleException
      */
     public void changeAccountHandle(String oldHandle, String newHandle) throws HandleNotRecognisedException, IllegalHandleException, InvalidHandleException {
-
         Account account = Account.searchByHandle(oldHandle);
         account.setHandle(newHandle);
         System.out.println("Account handle changed, new handle -> " + account.getHandle());
     }
 
     /**
-     *
      * @param handle      handle to identify the account.
      * @param description new text for description.
      * @throws HandleNotRecognisedException
      */
     @Override
     public void updateAccountDescription(String handle, String description) throws HandleNotRecognisedException {
-
         Account account = Account.searchByHandle(handle);
         account.setDescription(description);
         System.out.println("Account description changed, new desc -> " + account.getDescription());
     }
 
     /**
-     *
      * @param handle handle to identify the account.
      * @return
      * @throws HandleNotRecognisedException
@@ -99,7 +89,6 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     *
      * @param handle  handle to identify the account.
      * @param message post message.
      * @return
@@ -113,7 +102,6 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     *
      * @param handle of the account endorsing a post.
      * @param id     of the post being endorsed.
      * @return
@@ -128,7 +116,6 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     *
      * @param handle  of the account commenting a post.
      * @param id      of the post being commented.
      * @param message the comment post message.
@@ -145,7 +132,6 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     *
      * @param id ID of post to be removed.
      * @throws PostIDNotRecognisedException
      */
@@ -155,7 +141,6 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     *
      * @param id of the post to be shown.
      * @return
      * @throws PostIDNotRecognisedException
@@ -166,24 +151,20 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     *
      * @param id of the post to be shown.
      * @return
      * @throws PostIDNotRecognisedException
      * @throws NotActionablePostException
      */
     public StringBuilder showPostChildrenDetails(int id) throws PostIDNotRecognisedException, NotActionablePostException {
-        // Add parent details to StringBuilder
         StringBuilder builder = new StringBuilder("<pre>\n");
         Post post = Post.searchById(id);
-
         builder.append(getCommentDetails(post, 0));
         builder.append("</pre>");
         return builder;
     }
 
     /**
-     *
      * @param post
      * @param indentCounter
      * @return
@@ -198,12 +179,12 @@ public class SocialMedia implements SocialMediaPlatform {
         for (Comment comment : comments) {
             indentCounter++;
             builder.append(getCommentDetails(comment, indentCounter));
+            // Per comment we print it's details
         }
         return builder;
     }
 
     /**
-     *
      * @param post
      * @param indentCounter
      * @return
@@ -215,6 +196,7 @@ public class SocialMedia implements SocialMediaPlatform {
         StringBuilder indent = new StringBuilder();
 
         indent.append("\t".repeat(Math.max(0, indentCounter)));
+        // We indent it depending on what level of children it is
 
         String suffix = indent + "|\n" + indent + "| > ";
 
@@ -226,7 +208,6 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     *
      * @return
      */
     @Override
@@ -235,7 +216,6 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     *
      * @return
      */
     @Override
@@ -244,7 +224,6 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     *
      * @return
      */
     @Override
@@ -253,7 +232,6 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     *
      * @return
      */
     @Override
@@ -262,7 +240,6 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     *
      * @return
      */
     public int getMostEndorsedPost() {
@@ -270,7 +247,6 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     *
      * @return
      */
     public int getMostEndorsedAccount() {
@@ -286,7 +262,6 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     *
      * @param filename location of the file to be saved
      * @throws IOException
      */
@@ -295,11 +270,11 @@ public class SocialMedia implements SocialMediaPlatform {
             oos.writeObject(Account.getAccounts());
             oos.writeObject(Account.getIdCounter());
             oos.writeObject(Post.getAllPosts());
+            // We write the list and counters to a file
         }
     }
 
     /**
-     *
      * @param filename location of the file to be loaded
      * @throws IOException
      * @throws ClassNotFoundException
@@ -309,16 +284,17 @@ public class SocialMedia implements SocialMediaPlatform {
         int idCounter;
         ArrayList<Post> allPosts;
 
-
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename + ".ser"))) {
-
             accounts = (ArrayList<Account>) in.readObject();
             idCounter = (Integer) in.readObject();
             allPosts = (ArrayList<Post>) in.readObject();
+            // We read the objectsin the file
         }
 
         Post.allPosts = allPosts;
+        // Load the list
         Account.setIdCounter(idCounter);
         Account.setAccounts(accounts);
+        // Setting the counters
     }
 }

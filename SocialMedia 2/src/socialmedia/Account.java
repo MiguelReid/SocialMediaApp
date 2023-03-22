@@ -17,7 +17,6 @@ public class Account implements Serializable {
     }
 
     /**
-     *
      * @param idCounter
      */
     public static void setIdCounter(int idCounter) {
@@ -25,7 +24,6 @@ public class Account implements Serializable {
     }
 
     /**
-     *
      * @param accounts
      */
     public static void setAccounts(List<Account> accounts) {
@@ -33,7 +31,6 @@ public class Account implements Serializable {
     }
 
     /**
-     *
      * @param handle
      */
     public void setHandle(String handle) {
@@ -41,7 +38,6 @@ public class Account implements Serializable {
     }
 
     /**
-     *
      * @param description
      */
     public void setDescription(String description) {
@@ -49,7 +45,6 @@ public class Account implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public static int getIdCounter() {
@@ -57,7 +52,6 @@ public class Account implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public static List<Account> getAccounts() {
@@ -65,7 +59,6 @@ public class Account implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public String getHandle() {
@@ -73,7 +66,6 @@ public class Account implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public String getDescription() {
@@ -81,7 +73,6 @@ public class Account implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public int getId() {
@@ -89,7 +80,6 @@ public class Account implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public List<Post> getAccountPosts() {
@@ -97,7 +87,6 @@ public class Account implements Serializable {
     }
 
     /**
-     *
      * @param post
      */
     public void setAccountPosts(Post post) {
@@ -105,7 +94,6 @@ public class Account implements Serializable {
     }
 
     /**
-     *
      * @param handle
      * @param description
      */
@@ -117,7 +105,6 @@ public class Account implements Serializable {
     }
 
     /**
-     *
      * @param handle
      */
     public Account(String handle) {
@@ -127,7 +114,6 @@ public class Account implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public static int getNumberOfAccounts() {
@@ -136,6 +122,7 @@ public class Account implements Serializable {
 
     /**
      * Method to search an Account with the handle
+     *
      * @param searchHandle
      * @return
      */
@@ -144,6 +131,7 @@ public class Account implements Serializable {
         for (Account account : accounts) {
             String handle = account.getHandle();
             if (handle.equals(searchHandle)) {
+                // Checking if the account.handle == the one we're searching
                 foundAccount = account;
             }
         }
@@ -152,6 +140,7 @@ public class Account implements Serializable {
 
     /**
      * Method to search an Account with the id
+     *
      * @param searchId
      * @return
      */
@@ -160,6 +149,7 @@ public class Account implements Serializable {
         for (Account account : accounts) {
             int id = account.getId();
             if (id == searchId) {
+                // Checking if the account.id == the one we're searching
                 foundAccount = account;
             }
         }
@@ -168,6 +158,7 @@ public class Account implements Serializable {
 
     /**
      * Method to remove an account by its handle
+     *
      * @param handle
      */
     public static void removeAccount(String handle) {
@@ -178,6 +169,7 @@ public class Account implements Serializable {
 
     /**
      * Method to remove an account by its id
+     *
      * @param id
      */
     public static void removeAccount(int id) {
@@ -188,6 +180,7 @@ public class Account implements Serializable {
 
     /**
      * Method to get the account with most endorsements
+     *
      * @return
      */
     public static int getMostEndorsedAccount() {
@@ -195,9 +188,12 @@ public class Account implements Serializable {
         int mostEndorsements = 0;
         for (Account account : accounts) {
             List<Post> posts = account.getAccountPosts();
+            // We obtain all of the posts
             for (Post post : posts) {
                 int endorsements = post.getResponseEndorsements().size();
+                // check how many endorsements each post has
                 if (endorsements >= mostEndorsements) {
+                    // Compare them
                     id = account.getId();
                     mostEndorsements = endorsements;
                 }
@@ -215,7 +211,6 @@ public class Account implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     @Override
