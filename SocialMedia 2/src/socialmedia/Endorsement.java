@@ -4,16 +4,27 @@ public class Endorsement extends Post {
 
     private int parentPostID;
 
+    /**
+     *
+     * @return
+     */
     public int getParentPostID() {
         return parentPostID;
     }
 
+    /**
+     *
+     * @param parentPostID
+     */
     public void setParentPostID(int parentPostID) {
         this.parentPostID = parentPostID;
     }
 
-    //TODO
-
+    /**
+     *
+     * @param handle
+     * @param parentPostID
+     */
     public Endorsement(String handle, int parentPostID) {
         super(handle);
         setHandle(handle);
@@ -23,6 +34,10 @@ public class Endorsement extends Post {
         parentPost.setResponseEndorsements(this);
     }
 
+    /**
+     *
+     * @return
+     */
     public static int getNumberOnlyEndorsement() {
         int counter = 0;
 
@@ -34,6 +49,10 @@ public class Endorsement extends Post {
         return counter;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Endorsement{" +

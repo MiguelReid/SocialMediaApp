@@ -1,5 +1,7 @@
 import socialmedia.*;
 
+import java.io.IOException;
+
 /**
  * A short program to illustrate an app testing some minimal functionality of a
  * concrete implementation of the SocialMediaPlatform interface -- note you will
@@ -32,15 +34,25 @@ public class SocialMediaPlatformTestApp {
 			id = platform.createAccount("my_handle");
 			assert (platform.getNumberOfAccounts() == 1) : "number of accounts registered in the system does not match";
 
-			platform.removeAccount(id);
+			platform.updateAccountDescription("my_handle", "descriptionahahah");
+			platform.changeAccountHandle("my_handle", "new_handle");
+			System.out.println(platform.showAccount("new_handle"));
+
+			int postId = platform.createPost("new_handle", "i love mikey");
+			int endorseId = platform.endorsePost("new_handle", postId);
+			int commentId = platform.commentPost("new_handle", postId, "epic comment");
+
+			System.out.println(platform.showPostChildrenDetails(postId));
+
 			assert (platform.getNumberOfAccounts() == 0) : "number of accounts registered in the system does not match";
 
 		} catch (IllegalHandleException e) {
 			assert (false) : "IllegalHandleException thrown incorrectly";
 		} catch (InvalidHandleException e) {
 			assert (false) : "InvalidHandleException thrown incorrectly";
-		} catch (AccountIDNotRecognisedException e) {
-			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
+		} catch (HandleNotRecognisedException | InvalidPostException | NotActionablePostException |
+				 PostIDNotRecognisedException e) {
+			throw new RuntimeException(e);
 		}
 
 	}

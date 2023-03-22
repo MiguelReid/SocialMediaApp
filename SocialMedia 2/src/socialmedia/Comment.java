@@ -4,16 +4,30 @@ public class Comment extends Post {
 
     private int parentPostID;
 
+    /**
+     *
+     * @return
+     */
     public int getParentPostID() {
         return parentPostID;
     }
 
     //TODO check if we have to see flag about isEndorsement
 
+    /**
+     *
+     * @param parentPostID
+     */
     public void setParentPostID(int parentPostID) {
         this.parentPostID = parentPostID;
     }
 
+    /**
+     *
+     * @param handle
+     * @param parentPostID
+     * @param message
+     */
     public Comment(String handle, int parentPostID, String message) {
         super(handle, message);
         setHandle(handle);
@@ -23,6 +37,11 @@ public class Comment extends Post {
         parentPost.setResponseComments(this);
     }
 
+    /**
+     *
+     * @param handle
+     * @param parentPostID
+     */
     public Comment(String handle, int parentPostID) {
         super(handle);
         setHandle(handle);
@@ -31,6 +50,10 @@ public class Comment extends Post {
         parentPost.setResponseComments(this);
     }
 
+    /**
+     *
+     * @return
+     */
     public static int getNumberOnlyComments() {
         int counter = 0;
 
@@ -42,6 +65,10 @@ public class Comment extends Post {
         return counter;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Comment{" +

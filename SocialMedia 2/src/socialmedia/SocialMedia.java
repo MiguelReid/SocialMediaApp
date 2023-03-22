@@ -8,12 +8,27 @@ import java.util.List;
 
 public class SocialMedia implements SocialMediaPlatform {
 
+    /**
+     *
+     * @param handle account's handle.
+     * @return
+     * @throws IllegalHandleException
+     * @throws InvalidHandleException
+     */
     public int createAccount(String handle) throws IllegalHandleException, InvalidHandleException {
 
         Account account = new Account(handle);
         return account.getId();
     }
 
+    /**
+     *
+     * @param handle      account's handle.
+     * @param description account's description.
+     * @return
+     * @throws IllegalHandleException
+     * @throws InvalidHandleException
+     */
     @Override
     public int createAccount(String handle, String description) throws IllegalHandleException, InvalidHandleException {
         Account account = new Account(handle, description);
@@ -22,67 +37,141 @@ public class SocialMedia implements SocialMediaPlatform {
         return account.getId();
     }
 
+    /**
+     *
+     * @param id ID of the account.
+     * @throws AccountIDNotRecognisedException
+     */
     public void removeAccount(int id) throws AccountIDNotRecognisedException {
         Account.removeAccount(id);
         System.out.println("Account removed");
     }
 
+    /**
+     *
+     * @param handle account's handle.
+     * @throws HandleNotRecognisedException
+     */
     @Override
     public void removeAccount(String handle) throws HandleNotRecognisedException {
         Account.removeAccount(handle);
         System.out.println("Account removed");
     }
 
+    /**
+     *
+     * @param oldHandle account's old handle.
+     * @param newHandle account's new handle.
+     * @throws HandleNotRecognisedException
+     * @throws IllegalHandleException
+     * @throws InvalidHandleException
+     */
     public void changeAccountHandle(String oldHandle, String newHandle) throws HandleNotRecognisedException, IllegalHandleException, InvalidHandleException {
 
         Account account = Account.searchByHandle(oldHandle);
         account.setHandle(newHandle);
-        System.out.println("Account handle changed");
+        System.out.println("Account handle changed, new handle -> " + account.getHandle());
     }
 
+    /**
+     *
+     * @param handle      handle to identify the account.
+     * @param description new text for description.
+     * @throws HandleNotRecognisedException
+     */
     @Override
     public void updateAccountDescription(String handle, String description) throws HandleNotRecognisedException {
 
         Account account = Account.searchByHandle(handle);
         account.setDescription(description);
-        System.out.println("Account description changed");
+        System.out.println("Account description changed, new desc -> " + account.getDescription());
     }
 
+    /**
+     *
+     * @param handle handle to identify the account.
+     * @return
+     * @throws HandleNotRecognisedException
+     */
     public String showAccount(String handle) throws HandleNotRecognisedException {
         Account account = Account.searchByHandle(handle);
         return account.toString();
     }
 
+    /**
+     *
+     * @param handle  handle to identify the account.
+     * @param message post message.
+     * @return
+     * @throws HandleNotRecognisedException
+     * @throws InvalidPostException
+     */
     public int createPost(String handle, String message) throws HandleNotRecognisedException, InvalidPostException {
         Post post = new Post(handle, message);
         System.out.println("Post created");
         return post.getId();
     }
 
+    /**
+     *
+     * @param handle of the account endorsing a post.
+     * @param id     of the post being endorsed.
+     * @return
+     * @throws HandleNotRecognisedException
+     * @throws PostIDNotRecognisedException
+     * @throws NotActionablePostException
+     */
     public int endorsePost(String handle, int id) throws HandleNotRecognisedException, PostIDNotRecognisedException, NotActionablePostException {
-
         Endorsement endorsement = new Endorsement(handle, id);
         System.out.println("Endorsement created");
         return endorsement.getId();
     }
 
+    /**
+     *
+     * @param handle  of the account commenting a post.
+     * @param id      of the post being commented.
+     * @param message the comment post message.
+     * @return
+     * @throws HandleNotRecognisedException
+     * @throws PostIDNotRecognisedException
+     * @throws NotActionablePostException
+     * @throws InvalidPostException
+     */
     public int commentPost(String handle, int id, String message) throws HandleNotRecognisedException, PostIDNotRecognisedException, NotActionablePostException, InvalidPostException {
-
         Comment comment = new Comment(handle, id, message);
         System.out.println("Comment created");
         return comment.getId();
     }
 
+    /**
+     *
+     * @param id ID of post to be removed.
+     * @throws PostIDNotRecognisedException
+     */
     public void deletePost(int id) throws PostIDNotRecognisedException {
         Post.removePost(id);
         System.out.println("Post removed");
     }
 
+    /**
+     *
+     * @param id of the post to be shown.
+     * @return
+     * @throws PostIDNotRecognisedException
+     */
     public String showIndividualPost(int id) throws PostIDNotRecognisedException {
         Post post = Post.searchById(id);
         return post.toString();
     }
 
+    /**
+     *
+     * @param id of the post to be shown.
+     * @return
+     * @throws PostIDNotRecognisedException
+     * @throws NotActionablePostException
+     */
     public StringBuilder showPostChildrenDetails(int id) throws PostIDNotRecognisedException, NotActionablePostException {
         // Add parent details to StringBuilder
         StringBuilder builder = new StringBuilder("<pre>\n");
@@ -93,7 +182,13 @@ public class SocialMedia implements SocialMediaPlatform {
         return builder;
     }
 
-    public StringBuilder getCommentDetails(Post post, int indentCounter) {
+    /**
+     *
+     * @param post
+     * @param indentCounter
+     * @return
+     */
+    private StringBuilder getCommentDetails(Post post, int indentCounter) {
         List<Comment> comments = post.getResponseComments();
 
         StringBuilder builder = new StringBuilder();
@@ -101,14 +196,19 @@ public class SocialMedia implements SocialMediaPlatform {
         builder.append(auxPostDetails(post, indentCounter));
 
         for (Comment comment : comments) {
-            System.out.println(comment);
             indentCounter++;
             builder.append(getCommentDetails(comment, indentCounter));
         }
         return builder;
     }
 
-    public String auxPostDetails(Post post, int indentCounter) {
+    /**
+     *
+     * @param post
+     * @param indentCounter
+     * @return
+     */
+    private String auxPostDetails(Post post, int indentCounter) {
         int numEndorsements = post.getResponseEndorsements().size();
         int numComments = post.getResponseComments().size();
 
@@ -125,40 +225,71 @@ public class SocialMedia implements SocialMediaPlatform {
                 post.getMessage() + "\n" + suffix;
     }
 
-
+    /**
+     *
+     * @return
+     */
     @Override
     public int getNumberOfAccounts() {
         return Account.getNumberOfAccounts();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getTotalOriginalPosts() {
         return Post.getNumberOnlyPosts();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getTotalEndorsmentPosts() {
         return Endorsement.getNumberOnlyEndorsement();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getTotalCommentPosts() {
         return Comment.getNumberOnlyComments();
     }
 
+    /**
+     *
+     * @return
+     */
     public int getMostEndorsedPost() {
         return Post.getMostEndorsedPost();
     }
 
+    /**
+     *
+     * @return
+     */
     public int getMostEndorsedAccount() {
         return Account.getMostEndorsedAccount();
     }
 
+    /**
+     *
+     */
     public void erasePlatform() {
         Account.reset();
         Post.reset();
     }
 
+    /**
+     *
+     * @param filename location of the file to be saved
+     * @throws IOException
+     */
     public void savePlatform(String filename) throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream((filename + ".ser")))) {
             oos.writeObject(Account.getAccounts());
@@ -167,6 +298,12 @@ public class SocialMedia implements SocialMediaPlatform {
         }
     }
 
+    /**
+     *
+     * @param filename location of the file to be loaded
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void loadPlatform(String filename) throws IOException, ClassNotFoundException {
         ArrayList<Account> accounts;
         int idCounter;

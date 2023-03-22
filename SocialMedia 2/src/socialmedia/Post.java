@@ -14,59 +14,115 @@ public class Post implements Serializable {
     protected static List<Post> allPosts = new ArrayList<>();
     protected boolean isEndorsement = false;
 
+    /**
+     *
+     * @param numPosts
+     */
     public static void setNumPosts(int numPosts) {
         Post.numPosts = numPosts;
     }
+
+    /**
+     *
+     * @return
+     */
     public static List<Post> getAllPosts() {
         return allPosts;
     }
 
+    /**
+     *
+     * @param handle
+     */
     public void setHandle(String handle) {
         this.handle = handle;
     }
 
+    /**
+     *
+     * @param message
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getIsEndorsement() {
         return isEndorsement;
     }
 
+    /**
+     *
+     * @param endorsement
+     */
     public void setIsEndorsement(boolean endorsement) {
         isEndorsement = endorsement;
     }
 
-    //TODO check future the getters for the list
-
+    /**
+     *
+     * @return
+     */
     public List<Comment> getResponseComments() {
         return responseComments;
     }
 
+    /**
+     *
+     * @param newComment
+     */
     public void setResponseComments(Comment newComment) {
         responseComments.add(newComment);
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Endorsement> getResponseEndorsements() {
         return responseEndorsements;
     }
 
+    /**
+     *
+     * @param newEndorsement
+     */
     public void setResponseEndorsements(Endorsement newEndorsement) {
         responseEndorsements.add(newEndorsement);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getHandle() {
         return handle;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     *
+     * @param handle
+     * @param message
+     */
     public Post(String handle, String message) {
         this.handle = handle;
         this.message = message;
@@ -76,6 +132,10 @@ public class Post implements Serializable {
         account.setAccountPosts(this);
     }
 
+    /**
+     *
+     * @param handle
+     */
     public Post(String handle) {
         this.handle = handle;
         this.id = numPosts++;
@@ -84,6 +144,11 @@ public class Post implements Serializable {
         account.setAccountPosts(this);
     }
 
+    /**
+     *
+     * @param searchId
+     * @return
+     */
     public static Post searchById(int searchId) {
         Post foundPost = null;
         for (Post post : allPosts) {
@@ -95,11 +160,19 @@ public class Post implements Serializable {
         return foundPost;
     }
 
+    /**
+     *
+     * @param id
+     */
     public static void removePost(int id) {
         Post post = searchById(id);
         allPosts.remove(post);
     }
 
+    /**
+     *
+     * @return
+     */
     public static int getNumberOnlyPosts() {
         int counter = 0;
 
@@ -111,6 +184,10 @@ public class Post implements Serializable {
         return counter;
     }
 
+    /**
+     *
+     * @return
+     */
     public static int getMostEndorsedPost() {
         int id = -1;
         int mostEndorsements = 0;
@@ -124,11 +201,18 @@ public class Post implements Serializable {
         return id;
     }
 
+    /**
+     *
+     */
     public static void reset() {
         allPosts.clear();
         numPosts = 0;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Post{" +
