@@ -12,6 +12,10 @@ public class Account implements Serializable {
     private static List<Account> accounts = new ArrayList<>();
     private List<Post> accountPosts = new ArrayList<>();
 
+    public void clearAccountPosts() {
+        this.accountPosts = null;
+    }
+
     /**
      *
      * @param idCounter
@@ -169,6 +173,7 @@ public class Account implements Serializable {
     public static void removeAccount(String handle) {
         Account account = searchByHandle(handle);
         accounts.remove(account);
+        account.clearAccountPosts();
     }
 
     /**
@@ -178,6 +183,7 @@ public class Account implements Serializable {
     public static void removeAccount(int id) {
         Account account = searchById(id);
         accounts.remove(account);
+        account.clearAccountPosts();
     }
 
     /**

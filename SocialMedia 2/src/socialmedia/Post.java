@@ -15,7 +15,6 @@ public class Post implements Serializable {
     protected boolean isEndorsement = false;
 
     /**
-     *
      * @param numPosts
      */
     public static void setNumPosts(int numPosts) {
@@ -23,7 +22,6 @@ public class Post implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public static List<Post> getAllPosts() {
@@ -31,7 +29,6 @@ public class Post implements Serializable {
     }
 
     /**
-     *
      * @param handle
      */
     public void setHandle(String handle) {
@@ -39,7 +36,6 @@ public class Post implements Serializable {
     }
 
     /**
-     *
      * @param message
      */
     public void setMessage(String message) {
@@ -47,7 +43,6 @@ public class Post implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public boolean getIsEndorsement() {
@@ -55,7 +50,6 @@ public class Post implements Serializable {
     }
 
     /**
-     *
      * @param endorsement
      */
     public void setIsEndorsement(boolean endorsement) {
@@ -63,7 +57,6 @@ public class Post implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public List<Comment> getResponseComments() {
@@ -71,7 +64,6 @@ public class Post implements Serializable {
     }
 
     /**
-     *
      * @param newComment
      */
     public void setResponseComments(Comment newComment) {
@@ -79,7 +71,6 @@ public class Post implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public List<Endorsement> getResponseEndorsements() {
@@ -87,7 +78,6 @@ public class Post implements Serializable {
     }
 
     /**
-     *
      * @param newEndorsement
      */
     public void setResponseEndorsements(Endorsement newEndorsement) {
@@ -95,7 +85,6 @@ public class Post implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public String getHandle() {
@@ -103,7 +92,6 @@ public class Post implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public String getMessage() {
@@ -111,7 +99,6 @@ public class Post implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     public int getId() {
@@ -132,7 +119,6 @@ public class Post implements Serializable {
     }
 
     /**
-     *
      * @param handle
      */
     public Post(String handle) {
@@ -145,6 +131,7 @@ public class Post implements Serializable {
 
     /**
      * Method to search a post with an ID
+     *
      * @param searchId
      * @return
      */
@@ -161,15 +148,18 @@ public class Post implements Serializable {
 
     /**
      * Method to remove a post with an ID
+     *
      * @param id
      */
-    public static void removePost(int id) {
+    public void removePost(int id) {
         Post post = searchById(id);
         allPosts.remove(post);
+        post.responseEndorsements = null;
     }
 
     /**
      * Method to get total number of Posts
+     *
      * @return
      */
     public static int getNumberOnlyPosts() {
@@ -185,6 +175,7 @@ public class Post implements Serializable {
 
     /**
      * Method to get the post with most endorsements
+     *
      * @return
      */
     public static int getMostEndorsedPost() {
@@ -209,7 +200,6 @@ public class Post implements Serializable {
     }
 
     /**
-     *
      * @return
      */
     @Override
