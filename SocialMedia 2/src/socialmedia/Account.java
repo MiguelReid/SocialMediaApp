@@ -131,7 +131,7 @@ public class Account implements Serializable {
     }
 
     /**
-     *
+     * Method to search an Account with the handle
      * @param searchHandle
      * @return
      */
@@ -147,7 +147,7 @@ public class Account implements Serializable {
     }
 
     /**
-     *
+     * Method to search an Account with the id
      * @param searchId
      * @return
      */
@@ -163,7 +163,7 @@ public class Account implements Serializable {
     }
 
     /**
-     *
+     * Method to remove an account by its handle
      * @param handle
      */
     public static void removeAccount(String handle) {
@@ -172,7 +172,7 @@ public class Account implements Serializable {
     }
 
     /**
-     *
+     * Method to remove an account by its id
      * @param id
      */
     public static void removeAccount(int id) {
@@ -181,7 +181,7 @@ public class Account implements Serializable {
     }
 
     /**
-     *
+     * Method to get the account with most endorsements
      * @return
      */
     public static int getMostEndorsedAccount() {
@@ -201,7 +201,7 @@ public class Account implements Serializable {
     }
 
     /**
-     *
+     * Method to reset the list of acounts
      */
     public static void reset() {
         accounts.clear();

@@ -5,17 +5,13 @@ public class Comment extends Post {
     private int parentPostID;
 
     /**
-     *
      * @return
      */
     public int getParentPostID() {
         return parentPostID;
     }
 
-    //TODO check if we have to see flag about isEndorsement
-
     /**
-     *
      * @param parentPostID
      */
     public void setParentPostID(int parentPostID) {
@@ -23,7 +19,6 @@ public class Comment extends Post {
     }
 
     /**
-     *
      * @param handle
      * @param parentPostID
      * @param message
@@ -38,7 +33,6 @@ public class Comment extends Post {
     }
 
     /**
-     *
      * @param handle
      * @param parentPostID
      */
@@ -51,8 +45,8 @@ public class Comment extends Post {
     }
 
     /**
-     *
-     * @return
+     * Method to find the number of comments
+     * @return number of comments
      */
     public static int getNumberOnlyComments() {
         int counter = 0;
@@ -66,7 +60,6 @@ public class Comment extends Post {
     }
 
     /**
-     *
      * @return
      */
     @Override

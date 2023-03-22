@@ -119,7 +119,6 @@ public class Post implements Serializable {
     }
 
     /**
-     *
      * @param handle
      * @param message
      */
@@ -145,7 +144,7 @@ public class Post implements Serializable {
     }
 
     /**
-     *
+     * Method to search a post with an ID
      * @param searchId
      * @return
      */
@@ -161,7 +160,7 @@ public class Post implements Serializable {
     }
 
     /**
-     *
+     * Method to remove a post with an ID
      * @param id
      */
     public static void removePost(int id) {
@@ -170,7 +169,7 @@ public class Post implements Serializable {
     }
 
     /**
-     *
+     * Method to get total number of Posts
      * @return
      */
     public static int getNumberOnlyPosts() {
@@ -185,7 +184,7 @@ public class Post implements Serializable {
     }
 
     /**
-     *
+     * Method to get the post with most endorsements
      * @return
      */
     public static int getMostEndorsedPost() {
@@ -202,7 +201,7 @@ public class Post implements Serializable {
     }
 
     /**
-     *
+     * Method to empty the number of posts
      */
     public static void reset() {
         allPosts.clear();

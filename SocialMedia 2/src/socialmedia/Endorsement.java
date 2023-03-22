@@ -35,7 +35,7 @@ public class Endorsement extends Post {
     }
 
     /**
-     *
+     * Method to get the number of Endorsements
      * @return
      */
     public static int getNumberOnlyEndorsement() {
