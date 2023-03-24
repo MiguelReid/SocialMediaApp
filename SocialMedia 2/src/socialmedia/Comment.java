@@ -5,7 +5,7 @@ public class Comment extends Post {
     private int parentPostID;
 
     /**
-     * @return
+     * @return The ID of the post this comment is associated with
      */
     public int getParentPostID() {
         return parentPostID;
@@ -46,7 +46,7 @@ public class Comment extends Post {
 
     /**
      * Method to find the number of comments
-     * @return number of comments
+     * @return The number of comments
      */
     public static int getNumberOnlyComments() {
         int counter = 0;
@@ -60,7 +60,7 @@ public class Comment extends Post {
     }
 
     /**
-     * @return
+     * @return A string containign information about the comment
      */
     @Override
     public String toString() {

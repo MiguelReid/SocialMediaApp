@@ -10,7 +10,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
     /**
      * @param handle account's handle.
-     * @return
+     * @return The ID of the account
      * @throws IllegalHandleException
      * @throws InvalidHandleException
      */
@@ -22,7 +22,7 @@ public class SocialMedia implements SocialMediaPlatform {
     /**
      * @param handle      account's handle.
      * @param description account's description.
-     * @return
+     * @return The ID of the account
      * @throws IllegalHandleException
      * @throws InvalidHandleException
      */
@@ -80,7 +80,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
     /**
      * @param handle handle to identify the account.
-     * @return
+     * @return A description of the account
      * @throws HandleNotRecognisedException
      */
     public String showAccount(String handle) throws HandleNotRecognisedException {
@@ -91,7 +91,7 @@ public class SocialMedia implements SocialMediaPlatform {
     /**
      * @param handle  handle to identify the account.
      * @param message post message.
-     * @return
+     * @return The ID of the post
      * @throws HandleNotRecognisedException
      * @throws InvalidPostException
      */
@@ -104,7 +104,7 @@ public class SocialMedia implements SocialMediaPlatform {
     /**
      * @param handle of the account endorsing a post.
      * @param id     of the post being endorsed.
-     * @return
+     * @return The ID of the endorsement
      * @throws HandleNotRecognisedException
      * @throws PostIDNotRecognisedException
      * @throws NotActionablePostException
@@ -119,7 +119,7 @@ public class SocialMedia implements SocialMediaPlatform {
      * @param handle  of the account commenting a post.
      * @param id      of the post being commented.
      * @param message the comment post message.
-     * @return
+     * @return The ID of the comment
      * @throws HandleNotRecognisedException
      * @throws PostIDNotRecognisedException
      * @throws NotActionablePostException
@@ -142,7 +142,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
     /**
      * @param id of the post to be shown.
-     * @return
+     * @return A description of the post
      * @throws PostIDNotRecognisedException
      */
     public String showIndividualPost(int id) throws PostIDNotRecognisedException {
@@ -152,7 +152,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
     /**
      * @param id of the post to be shown.
-     * @return
+     * @return A description of the post and all related comments and endorsements
      * @throws PostIDNotRecognisedException
      * @throws NotActionablePostException
      */
@@ -167,7 +167,7 @@ public class SocialMedia implements SocialMediaPlatform {
     /**
      * @param post
      * @param indentCounter
-     * @return
+     * @return A description of all comments related to a post
      */
     private StringBuilder getCommentDetails(Post post, int indentCounter) {
         List<Comment> comments = post.getResponseComments();
@@ -187,7 +187,7 @@ public class SocialMedia implements SocialMediaPlatform {
     /**
      * @param post
      * @param indentCounter
-     * @return
+     * @return A formatted description of a post or subclass
      */
     private String auxPostDetails(Post post, int indentCounter) {
         int numEndorsements = post.getResponseEndorsements().size();
@@ -208,7 +208,7 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     * @return
+     * @return The number of accounts
      */
     @Override
     public int getNumberOfAccounts() {
@@ -216,7 +216,7 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     * @return
+     * @return The number of posts
      */
     @Override
     public int getTotalOriginalPosts() {
@@ -224,7 +224,7 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     * @return
+     * @return The number of endorsements
      */
     @Override
     public int getTotalEndorsmentPosts() {
@@ -232,7 +232,7 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     * @return
+     * @return The number of comments
      */
     @Override
     public int getTotalCommentPosts() {
@@ -240,14 +240,14 @@ public class SocialMedia implements SocialMediaPlatform {
     }
 
     /**
-     * @return
+     * @return The ID of the most endorsed post
      */
     public int getMostEndorsedPost() {
         return Post.getMostEndorsedPost();
     }
 
     /**
-     * @return
+     * @return The id of most endorsed account
      */
     public int getMostEndorsedAccount() {
         return Account.getMostEndorsedAccount();

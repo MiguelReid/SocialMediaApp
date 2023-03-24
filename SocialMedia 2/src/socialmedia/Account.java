@@ -45,42 +45,42 @@ public class Account implements Serializable {
     }
 
     /**
-     * @return
+     * @return The ID counter used for creating accounts
      */
     public static int getIdCounter() {
         return idCounter;
     }
 
     /**
-     * @return
+     * @return A list of all accounts
      */
     public static List<Account> getAccounts() {
         return accounts;
     }
 
     /**
-     * @return
+     * @return The handle of the account
      */
     public String getHandle() {
         return handle;
     }
 
     /**
-     * @return
+     * @return The description of the account
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * @return
+     * @return The ID of the account
      */
     public int getId() {
         return id;
     }
 
     /**
-     * @return
+     * @return A list of all posts from one account
      */
     public List<Post> getAccountPosts() {
         return accountPosts;
@@ -114,7 +114,7 @@ public class Account implements Serializable {
     }
 
     /**
-     * @return
+     * @return The number of accounts
      */
     public static int getNumberOfAccounts() {
         return accounts.size();
@@ -124,7 +124,7 @@ public class Account implements Serializable {
      * Method to search an Account with the handle
      *
      * @param searchHandle
-     * @return
+     * @return The account instance corresponding to the given handle
      */
     public static Account searchByHandle(String searchHandle) {
         Account foundAccount = null;
@@ -142,7 +142,7 @@ public class Account implements Serializable {
      * Method to search an Account with the id
      *
      * @param searchId
-     * @return
+     * @return The account instance corresponding to the given ID
      */
     public static Account searchById(int searchId) {
         Account foundAccount = null;
@@ -181,7 +181,7 @@ public class Account implements Serializable {
     /**
      * Method to get the account with most endorsements
      *
-     * @return
+     * @return ID of the most endorsed account
      */
     public static int getMostEndorsedAccount() {
         int id = -1;
@@ -211,7 +211,7 @@ public class Account implements Serializable {
     }
 
     /**
-     * @return
+     * @return String detailing account information
      */
     @Override
     public String toString() {

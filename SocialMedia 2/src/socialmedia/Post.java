@@ -22,7 +22,7 @@ public class Post implements Serializable {
     }
 
     /**
-     * @return
+     * @return A list containing every post
      */
     public static List<Post> getAllPosts() {
         return allPosts;
@@ -43,7 +43,7 @@ public class Post implements Serializable {
     }
 
     /**
-     * @return
+     * @return A boolean value whether the post is an endorsement or not
      */
     public boolean getIsEndorsement() {
         return isEndorsement;
@@ -57,7 +57,7 @@ public class Post implements Serializable {
     }
 
     /**
-     * @return
+     * @return A list of comments related to this post
      */
     public List<Comment> getResponseComments() {
         return responseComments;
@@ -71,7 +71,7 @@ public class Post implements Serializable {
     }
 
     /**
-     * @return
+     * @return A list of all endorsements related to this post
      */
     public List<Endorsement> getResponseEndorsements() {
         return responseEndorsements;
@@ -85,21 +85,21 @@ public class Post implements Serializable {
     }
 
     /**
-     * @return
+     * @return The handle of the account which created this post
      */
     public String getHandle() {
         return handle;
     }
 
     /**
-     * @return
+     * @return The message of this post
      */
     public String getMessage() {
         return message;
     }
 
     /**
-     * @return
+     * @return The ID of this post
      */
     public int getId() {
         return id;
@@ -133,7 +133,7 @@ public class Post implements Serializable {
      * Method to search a post with an ID
      *
      * @param searchId
-     * @return
+     * @return The post instance corresponding to the ID given
      */
     public static Post searchById(int searchId) {
         Post foundPost = null;
@@ -160,7 +160,7 @@ public class Post implements Serializable {
     /**
      * Method to get total number of Posts
      *
-     * @return
+     * @return The number of posts which aren't comments or endorsements
      */
     public static int getNumberOnlyPosts() {
         int counter = 0;
@@ -176,7 +176,7 @@ public class Post implements Serializable {
     /**
      * Method to get the post with most endorsements
      *
-     * @return
+     * @return The ID of the most endorsed post
      */
     public static int getMostEndorsedPost() {
         int id = -1;
@@ -202,7 +202,7 @@ public class Post implements Serializable {
     }
 
     /**
-     * @return
+     * @return A String with information about the Post
      */
     @Override
     public String toString() {

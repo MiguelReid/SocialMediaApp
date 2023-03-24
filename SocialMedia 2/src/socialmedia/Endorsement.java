@@ -6,7 +6,7 @@ public class Endorsement extends Post {
 
     /**
      *
-     * @return
+     * @return The ID of the post the endorsement is associated with
      */
     public int getParentPostID() {
         return parentPostID;
@@ -36,7 +36,7 @@ public class Endorsement extends Post {
 
     /**
      * Method to get the number of Endorsements
-     * @return
+     * @return The number of endorsements
      */
     public static int getNumberOnlyEndorsement() {
         int counter = 0;
@@ -51,7 +51,7 @@ public class Endorsement extends Post {
 
     /**
      *
-     * @return
+     * @return A string containing information about the endorsement
      */
     @Override
     public String toString() {
